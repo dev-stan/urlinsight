@@ -37,8 +37,10 @@ def create_link(link_in: LinkCreate, db: Session = Depends(get_db)):
     return link
 
 @app.get("/links/{short_code}", response_model=LinkResponse)
-def get_link(short_code: str, db: Session = Depends(get_db)):
+def get_link(short_code: str | None = None, db: Session = Depends(get_db)):
     link = db.query(Link).filter(Link.short_code == short_code).first()
     if not link:
         raise HTTPException(status_code=404, detail="Link not found")
+    if not short_code:
+        return db.query(Link).all()
     return link
