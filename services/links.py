@@ -2,6 +2,7 @@ import random, string
 from sqlalchemy.orm import Session
 from models import Link
 
+
 def generate_short_code(length=6):
     return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
