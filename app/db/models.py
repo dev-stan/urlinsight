@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, Date, Integer, String, DateTime, ForeignKey, UniqueConstraint
 from datetime import datetime
 from app.db.database import Base
 from datetime import datetime, timezone
@@ -21,3 +21,16 @@ class ClickEvent(Base):
     user_agent = Column(String(512), nullable=True)
     referrer = Column(String(512), nullable=True)
     is_bot = Column(Integer, default=0)
+
+class UniqueVisit(Base):
+    __tablename__ = "unique_visits"
+
+    id = Column(Integer, primary_key=True)
+    link_id = Column(Integer, ForeignKey("links.id"), nullable=False)
+    ip_hash = Column(String(64), nullable=False)
+    date = Column(Date, nullable=False)
+    first_seen_at = Column(DateTime, default=datetime.now(timezone.utc))
+
+    __table_args__ = (
+        UniqueConstraint("link_id", "ip_hash", "date"),
+    )

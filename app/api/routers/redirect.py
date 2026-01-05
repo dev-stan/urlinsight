@@ -4,6 +4,7 @@ from fastapi.responses import RedirectResponse
 from app.api.deps import get_link_or_404
 from app.db.models import Link
 from app.services.click_event import create_click_event
+from app.services.unique_visit import create_unique_visit
 from app.db.database import get_db
 from sqlalchemy.orm import Session
 from fastapi import Request
@@ -24,4 +25,11 @@ def redirect_link(request: Request, link: Link = Depends(get_link_or_404), db: S
         user_agent=user_agent,
         referrer=referrer
     )
+
+    create_unique_visit(
+        db=db,
+        link_id=link.id,
+        ip_hash=(ip)
+    )
+
     return link.target_url
