@@ -1,11 +1,11 @@
 # routers/links.py
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from schemas import LinkCreate, LinkResponse
-from dependencies import get_link_or_404
-from database import get_db
-from services.links import create_unique_link
-from models import Link
+from app.schemas.link import LinkCreate, LinkResponse
+from app.dependencies import get_link_or_404
+from app.db.database import get_db
+from app.services.links import create_unique_link
+from app.db.models import Link
 
 router = APIRouter(prefix="/links", tags=["links"])
 

@@ -1,9 +1,7 @@
 from sqlalchemy.orm import Session
-from fastapi import Request
-
 
 def create_click_event(db: Session, link_id: int, ip_hash: str, user_agent: str, referrer: str):
-    from models import ClickEvent
+    from app.db.models import ClickEvent
 
     click_event = ClickEvent(
         link_id=link_id,

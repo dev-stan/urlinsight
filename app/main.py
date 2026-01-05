@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from routers import links, redirect
-from database import engine, Base
+from app.routers import links, redirect
+from app.db.database import engine, Base
 from contextlib import asynccontextmanager
 
 @asynccontextmanager

@@ -1,6 +1,6 @@
 import random, string
 from sqlalchemy.orm import Session
-from models import Link
+from app.db.models import Link
 
 
 def generate_short_code(length=6):

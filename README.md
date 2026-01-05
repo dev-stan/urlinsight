@@ -8,7 +8,7 @@ A backend service that shortens URLs and passively captures link usage analytics
 
 - [x] Create short URLs from long URLs  
 - [x] Redirect short URLs to their target URL  
-- [ ] Capture click events (timestamp, hashed IP, user agent, referrer)  
+- [x] Capture click events (timestamp, hashed IP, user agent, referrer)  
 - [ ] Classify events (device type, browser, bot vs human)  
 - [ ] Track unique visitors and bot traffic per link  
 - [ ] Aggregate analytics per link (total clicks, clicks over time)  
