@@ -3,9 +3,15 @@ from sqlalchemy.orm import Session
 from app.schemas.link import LinkCreate, LinkResponse
 from app.api.deps import get_link_or_404
 from app.db.database import get_db
-from app.services.links import create_unique_link, get_link_analytics
+from app.services.links.queries import create_unique_link
 from app.db.models import Link
-
+from app.services.links.normalizers import normalize_link_analytics
+from app.services.links.queries import (
+    get_total_clicks,
+    get_total_unique_visits,
+    get_daily_clicks,
+    get_daily_unique_visits,
+)
 router = APIRouter(prefix="/links", tags=["links"])
 
 @router.post("", response_model=LinkResponse)
@@ -22,5 +28,12 @@ def get_link(link: Link = Depends(get_link_or_404)):
 
 
 @router.get("/{short_code}/analytics")
-def link_analytics(link = Depends(get_link_or_404), db: Session = Depends(get_db)):
-    return get_link_analytics(db, link.id, link.short_code, link.target_url)
+def link_analytics(db: Session = Depends(get_db), link: Link = Depends(get_link_or_404)):
+    # fetch raw DB data
+    total_clicks = get_total_clicks(db, link.id)
+    total_unique_visits = get_total_unique_visits(db, link.id)
+    daily_clicks = get_daily_clicks(db, link.id)
+    daily_unique_visits = get_daily_unique_visits(db, link.id)
+
+    # normalize for API response
+    return normalize_link_analytics(link, total_clicks, total_unique_visits, daily_clicks, daily_unique_visits)
