@@ -8,14 +8,14 @@ from app.services.unique_visit import create_unique_visit
 from app.db.database import get_db
 from sqlalchemy.orm import Session
 from fastapi import Request
-import ipaddress
+from app.core.security import hash_ip
 
 
 router = APIRouter(prefix="/redirect", tags=["redirect"])
 
 @router.get("/{short_code}", response_class=RedirectResponse)
 def redirect_link(request: Request, link: Link = Depends(get_link_or_404), db: Session = Depends(get_db)):
-    ip_hash = ipaddress.ip_hash(request.client.host)
+    ip_hash = hash_ip(request.client.host)
     user_agent = request.headers.get("user-agent")
     referrer = request.headers.get("referer")
 
