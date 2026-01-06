@@ -1,3 +1,4 @@
+from app.core import config
 from fastapi import FastAPI
 from app.api.routers import links, redirect
 from app.db.database import engine, Base
