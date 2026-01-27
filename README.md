@@ -1,6 +1,6 @@
 # URL Insight
 
-A backend service that shortens URLs and passively captures link usage analytics via an API. Not just a URL shortener - it's more like a telemetry system for links.
+A backend service that shortens URLs and passively captures link usage analytics via an API. Not a URL shortener - it's more like a telemetry system for links.
 
 ---
 
@@ -11,10 +11,8 @@ A backend service that shortens URLs and passively captures link usage analytics
 - [x] Capture click events (timestamp, hashed IP, user agent, referrer)  
 - [x] Track unique visitors and bot traffic per link  
 - [x] Aggregate analytics per link (total clicks, clicks over time)
-- [ ] Classify events (device type, browser, bot vs human)  
-- [ ] Query cross-link metrics (tags, top-performing links, referrers)  
-- [ ] Expose all analytics via clean API endpoints  
-- [ ] Fully backend-focused; frontend is optional  
+- [x] Introduce window based rate limiter ( redis )
+- [x] Expose all analytics via clean API endpoints  
 
 
 ## Conceptual Overview
@@ -49,3 +47,4 @@ pip install -r requirements.txt
 
 # Run the app
 uvicorn main:app --reload
+
