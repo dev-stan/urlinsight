@@ -1,12 +1,11 @@
 import hmac
 import hashlib
 import os
-
-_SECRET = os.environ["IP_HASH_SECRET"].encode()
+from .config import settings
 
 def hash_ip(ip: str) -> str:
     return hmac.new(
-        _SECRET,
+        str(settings.ip_hash_secret),
         ip.encode(),
         hashlib.sha256
     ).hexdigest()
