@@ -1,6 +1,9 @@
-from datetime import datetime, timezone, date
+from datetime import date, datetime, timezone
+
 from sqlalchemy.exc import IntegrityError
+
 from app.db.models import UniqueVisit
+
 
 def create_unique_visit(db, link_id: int, ip_hash: str) -> bool:
     today: date = datetime.now(timezone.utc).date()
@@ -14,7 +17,7 @@ def create_unique_visit(db, link_id: int, ip_hash: str) -> bool:
     try:
         db.add(unique_visit)
         db.commit()
-        return True # new unique
+        return True  # new unique
     except IntegrityError:
         db.rollback()
-        return False # already counted today
+        return False  # already counted today

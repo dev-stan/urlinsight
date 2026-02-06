@@ -1,14 +1,17 @@
-from app.core import config
-from app.middleware import rate_limiter
-from fastapi import FastAPI
-from app.api.routers import links, redirect
-from app.db.database import engine, Base
 from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
+
+from app.api.routers import links, redirect
+from app.db.database import Base, engine
+from app.middleware import rate_limiter
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
-    yield # needed for context manager!!
+    yield  # needed for context manager!!
+
 
 app = FastAPI(lifespan=lifespan)
 

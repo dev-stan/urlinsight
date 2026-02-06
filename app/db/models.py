@@ -1,7 +1,9 @@
-from sqlalchemy import Column, Date, Integer, String, DateTime, ForeignKey, UniqueConstraint
-from datetime import datetime
-from app.db.database import Base
 from datetime import datetime, timezone
+
+from sqlalchemy import Column, Date, DateTime, ForeignKey, Integer, String, UniqueConstraint
+
+from app.db.database import Base
+
 
 class Link(Base):
     __tablename__ = "links"
@@ -10,6 +12,7 @@ class Link(Base):
     short_code = Column(String, unique=True, index=True, nullable=False)
     target_url = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.now(timezone.utc))
+
 
 class ClickEvent(Base):
     __tablename__ = "click_events"
@@ -22,6 +25,7 @@ class ClickEvent(Base):
     referrer = Column(String(512), nullable=True)
     is_bot = Column(Integer, default=0)
 
+
 class UniqueVisit(Base):
     __tablename__ = "unique_visits"
 
@@ -31,6 +35,4 @@ class UniqueVisit(Base):
     date = Column(Date, nullable=False)
     first_seen_at = Column(DateTime, default=datetime.now(timezone.utc))
 
-    __table_args__ = (
-        UniqueConstraint("link_id", "ip_hash", "date"),
-    )
+    __table_args__ = (UniqueConstraint("link_id", "ip_hash", "date"),)

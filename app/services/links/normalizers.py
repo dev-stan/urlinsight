@@ -1,6 +1,7 @@
 # services/analytics/normalizers.py
 import datetime as dt
 
+
 def normalize_link_analytics(link, total_clicks, total_unique_visits, daily_clicks, daily_unique_visits):
     clicks_by_date = {row.date: row.clicks for row in daily_clicks}
     uniques_by_date = {

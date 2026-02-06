@@ -1,4 +1,5 @@
 import time
+
 import redis.asyncio as redis
 from fastapi import Request
 
@@ -9,9 +10,10 @@ LIMIT = 5
 
 redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
 
+
 async def rate_limiter_handler(request: Request, call_next):
     requester = request.client.host
-    
+
     now_ms = int(time.time() * 1000)
     bucket_id = now_ms // BUCKET_MS
     redis_key = f"rl:{requester}:{bucket_id}"
@@ -22,6 +24,7 @@ async def rate_limiter_handler(request: Request, call_next):
 
     if count > LIMIT:
         from fastapi.responses import JSONResponse
+
         return JSONResponse(status_code=429, content={"detail": "Too Many Requests"})
 
     response = await call_next(request)

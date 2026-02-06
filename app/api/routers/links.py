@@ -1,26 +1,31 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from app.schemas.link import LinkCreate, LinkResponse
+
 from app.api.deps import get_link_or_404
 from app.db.database import get_db
-from app.services.links.queries import create_unique_link
 from app.db.models import Link
+from app.schemas.link import LinkCreate, LinkResponse
 from app.services.links.normalizers import normalize_link_analytics
 from app.services.links.queries import (
-    get_total_clicks,
-    get_total_unique_visits,
+    create_unique_link,
     get_daily_clicks,
     get_daily_unique_visits,
+    get_total_clicks,
+    get_total_unique_visits,
 )
+
 router = APIRouter(prefix="/links", tags=["links"])
+
 
 @router.post("", response_model=LinkResponse)
 def create_link(link_in: LinkCreate, db: Session = Depends(get_db)):
     return create_unique_link(db, link_in.target_url)
 
+
 @router.get("", response_model=list[LinkResponse])
 def list_links(db: Session = Depends(get_db)):
     return db.query(Link).all()
+
 
 @router.get("/{short_code}", response_model=LinkResponse)
 def get_link(link: Link = Depends(get_link_or_404)):
