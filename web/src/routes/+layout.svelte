@@ -15,6 +15,6 @@
 		{@render children()}
 	</div>
 	<footer class="border-t border-zinc-800/50 py-6 text-center text-sm text-zinc-600">
-		URLinsight is an open source project on <a href="https://github.com/dev-stan" class="text-zinc-500 underline decoration-zinc-700 underline-offset-2 hover:text-zinc-400">GitHub</a>.
+		URLinsight is an open source project on <a href="https://github.com/dev-stan/urlinsight" class="text-zinc-500 underline decoration-zinc-700 underline-offset-2 hover:text-zinc-400">GitHub</a>.
 	</footer>
 </div>
