@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class LinkCreate(BaseModel):
@@ -6,8 +6,7 @@ class LinkCreate(BaseModel):
 
 
 class LinkResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     short_code: str
     target_url: str
-
-    class Config:
-        orm_mode = True  # Allows returning SQLAlchemy objects directly

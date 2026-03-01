@@ -5,14 +5,14 @@ from app.db.models import ClickEvent, Link, UniqueVisit
 from app.services.links.utils import generate_short_code
 
 
-def create_unique_link(db: Session, target_url: str) -> Link:
+def create_unique_link(db: Session, target_url: str, user_id: int | None = None) -> Link:
     short_code = generate_short_code()
 
     # Ensure uniqueness (simple retry loop)
     while db.query(Link).filter(Link.short_code == short_code).first():
         short_code = generate_short_code()
 
-    link = Link(short_code=short_code, target_url=target_url)
+    link = Link(short_code=short_code, target_url=target_url, user_id=user_id)
     db.add(link)
     db.commit()
     db.refresh(link)

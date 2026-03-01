@@ -5,6 +5,9 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     database_url: AnyUrl
     ip_hash_secret: str
+    jwt_secret: str
+    jwt_algorithm: str = "HS256"
+    jwt_expire_days: int = 7
 
     model_config = SettingsConfigDict(env_file=".env")
 
