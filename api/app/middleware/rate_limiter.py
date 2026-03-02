@@ -3,29 +3,37 @@ import time
 import redis.asyncio as redis
 from fastapi import Request
 
-REDIS_HOST = "localhost"
-REDIS_PORT = 6379
+from app.core.config import settings
+
 BUCKET_MS = 1000
 LIMIT = 5
 
-redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
+redis_client = None
+if settings.redis_url:
+    redis_client = redis.Redis.from_url(settings.redis_url, decode_responses=True)
 
 
 async def rate_limiter_handler(request: Request, call_next):
-    requester = request.client.host
+    if redis_client is None:
+        return await call_next(request)
 
-    now_ms = int(time.time() * 1000)
-    bucket_id = now_ms // BUCKET_MS
-    redis_key = f"rl:{requester}:{bucket_id}"
+    try:
+        requester = request.client.host
 
-    count = await redis_client.incr(redis_key)
-    if count == 1:
-        await redis_client.pexpire(redis_key, BUCKET_MS)
+        now_ms = int(time.time() * 1000)
+        bucket_id = now_ms // BUCKET_MS
+        redis_key = f"rl:{requester}:{bucket_id}"
 
-    if count > LIMIT:
-        from fastapi.responses import JSONResponse
+        count = await redis_client.incr(redis_key)
+        if count == 1:
+            await redis_client.pexpire(redis_key, BUCKET_MS)
 
-        return JSONResponse(status_code=429, content={"detail": "Too Many Requests"})
+        if count > LIMIT:
+            from fastapi.responses import JSONResponse
+
+            return JSONResponse(status_code=429, content={"detail": "Too Many Requests"})
+    except Exception:
+        pass
 
     response = await call_next(request)
     return response

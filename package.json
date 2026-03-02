@@ -4,14 +4,18 @@
   "private": true,
   "description": "Monorepo for FastAPI backend and SvelteKit frontend",
   "scripts": {
-    "install:all": "npm install --prefix web && pip install -r api/requirements.txt",
+    "install:all": "npm install --prefix web && pip install -e api",
     "dev:api": "uvicorn app.main:app --reload --app-dir api --port 8000",
     "dev:web": "npm --prefix web run dev",
     "dev": "npx concurrently --kill-others \"npm run dev:api\" \"npm run dev:web\"",
     "build:web": "npm --prefix web run build",
-    "preview:web": "npm --prefix web run preview"
+    "preview:web": "npm --prefix web run preview",
+    "heroku-postbuild": "npm install --prefix web && npm run build:web"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }

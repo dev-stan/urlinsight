@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     jwt_secret: str
     jwt_algorithm: str = "HS256"
     jwt_expire_days: int = 7
+    redis_url: str | None = None
 
     model_config = SettingsConfigDict(env_file=".env")
 
