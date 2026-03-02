@@ -37,8 +37,8 @@
 <Header />
 
 <main class="pt-24 pb-20">
-	<div class="mx-auto max-w-2xl px-6">
-		<h1 class="mb-2 text-2xl font-semibold text-zinc-50">API Documentation</h1>
+	<div class="mx-auto max-w-2xl px-4 sm:px-6">
+		<h1 class="mb-2 text-xl font-semibold text-zinc-50 sm:text-2xl">API Documentation</h1>
 		<p class="mb-10 text-sm text-zinc-500">
 			Base URL: <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-zinc-300">http://localhost:8000</code>
 		</p>

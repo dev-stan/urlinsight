@@ -66,7 +66,7 @@
 <Header />
 
 <main class="pt-24">
-	<div class="mx-auto max-w-xl px-6">
+	<div class="mx-auto max-w-xl px-4 sm:px-6">
 		{#if auth.loading}
 			<div class="flex items-center justify-center py-20">
 				<div class="h-6 w-6 animate-spin rounded-full border-2 border-zinc-700 border-t-zinc-400"></div>

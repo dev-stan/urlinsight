@@ -30,7 +30,7 @@
 </script>
 
 <div class="rounded-xl border border-zinc-800 bg-zinc-900/50 transition-colors hover:border-zinc-700">
-	<button onclick={toggleExpand} class="w-full cursor-pointer px-5 py-4 text-left">
+	<button onclick={toggleExpand} class="w-full cursor-pointer px-4 py-4 text-left sm:px-5">
 		<div class="flex items-center justify-between gap-4">
 			<div class="min-w-0 flex-1">
 				<div class="flex items-center gap-2">
@@ -56,7 +56,7 @@
 	</button>
 
 	{#if expanded}
-		<div class="border-t border-zinc-800 px-5 py-4" transition:slide={{ duration: 200 }}>
+		<div class="border-t border-zinc-800 px-4 py-4 sm:px-5" transition:slide={{ duration: 200 }}>
 			{#if loading}
 				<div class="flex items-center gap-2 text-sm text-zinc-500">
 					<div class="h-4 w-4 animate-spin rounded-full border-2 border-zinc-700 border-t-zinc-400"></div>

@@ -22,8 +22,8 @@
 		class="relative overflow-hidden border-b border-amber-900/30 bg-gradient-to-r from-amber-950/40 via-zinc-900 to-amber-950/40"
 		transition:slide={{ duration: 300 }}
 	>
-		<div class="mx-auto flex max-w-3xl items-center gap-4 px-6 py-3">
-			<div class="shrink-0">
+		<div class="mx-auto flex max-w-3xl items-start gap-3 px-4 py-3 sm:items-center sm:gap-4 sm:px-6">
+			<div class="hidden shrink-0 sm:block">
 				<Mascot size={40} animate />
 			</div>
 			<p class="flex-1 text-sm text-zinc-300">

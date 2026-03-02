@@ -44,7 +44,7 @@
 	<title>Register - URLinsight</title>
 </svelte:head>
 
-<div class="flex min-h-screen items-center justify-center px-6">
+<div class="flex min-h-screen items-center justify-center px-4 sm:px-6">
 	<div class="w-full max-w-sm">
 		<div class="mb-8 flex justify-center">
 			<Mascot size={80} animate />

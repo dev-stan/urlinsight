@@ -37,8 +37,8 @@
 <Header />
 
 <main class="pt-24">
-	<div class="mx-auto max-w-2xl px-6">
-		<h1 class="mb-6 text-2xl font-semibold text-zinc-50">My Links</h1>
+	<div class="mx-auto max-w-2xl px-4 sm:px-6">
+		<h1 class="mb-6 text-xl font-semibold text-zinc-50 sm:text-2xl">My Links</h1>
 
 		{#if loading}
 			<div class="flex items-center gap-2 text-sm text-zinc-500">

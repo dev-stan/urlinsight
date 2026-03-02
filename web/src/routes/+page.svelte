@@ -24,9 +24,9 @@
 		<GuestBanner />
 	{/if}
 
-	<div class="flex min-h-[70vh] items-center justify-center py-20">
-		<div class="text-center">
-			<div class="mb-8 flex justify-center">
+	<div class="flex min-h-[60vh] items-center justify-center px-4 py-12 sm:min-h-[70vh] sm:px-0 sm:py-20">
+		<div class="w-full text-center">
+			<div class="mb-6 flex justify-center sm:mb-8">
 				<Mascot size={100} animate />
 			</div>
 			<UrlShortener onLinkCreated={handleLinkCreated} />

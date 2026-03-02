@@ -6,7 +6,7 @@
 	let { links, loading }: { links: Link[]; loading: boolean } = $props();
 </script>
 
-<section class="mx-auto max-w-2xl px-6">
+<section class="mx-auto max-w-2xl px-4 sm:px-6">
 	<h2 class="mb-6 text-xl font-semibold text-zinc-50">Your Links</h2>
 
 	{#if loading}
