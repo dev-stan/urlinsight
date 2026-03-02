@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>URLinsight</title>
+	<title>(Open)URL Insight</title>
 </svelte:head>
 
 <div class="flex min-h-screen flex-col">
