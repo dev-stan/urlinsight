@@ -3,7 +3,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    database_url: AnyUrl
+    database_url: AnyUrl = "sqlite:///./app.db"
     ip_hash_secret: str
     jwt_secret: str
     jwt_algorithm: str = "HS256"
