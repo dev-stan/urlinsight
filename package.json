@@ -10,7 +10,7 @@
     "dev": "npx concurrently --kill-others \"npm run dev:api\" \"npm run dev:web\"",
     "build:web": "npm --prefix web run build",
     "preview:web": "npm --prefix web run preview",
-    "heroku-postbuild": "npm install --prefix web && npm run build:web"
+    "heroku-postbuild": "npm install --prefix web --include=dev && npm run build:web"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
